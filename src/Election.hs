@@ -46,7 +46,7 @@ insertPrefMap prefMap (over,under)
    | otherwise                       = Map.insert (over,under) 1 prefMap
 
 givePrefMap :: Election -> PreferenceMap
-givePrefMap elec = foldl insertPrefMap blankPrefMap $ concat (map givePrefs elec)
+givePrefMap elec = foldl insertPrefMap blankPrefMap $ concat (map (givePrefs . List.nub) elec)
 
 processElection :: Election -> BallotResult
 processElection = orderPrefStrength . givePrefMap
