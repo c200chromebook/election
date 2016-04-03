@@ -11,6 +11,8 @@ import qualified EndToEndElect as E
 decodedList :: B.ByteString -> [[String]]
 decodedList x = (fromJust .decode $ x :: [[String]])
 
+
+
 -- if gchi, run this :set -XOverloadedStrings
 main :: IO ()
 main = scotty 3000 $ do
@@ -20,3 +22,9 @@ main = scotty 3000 $ do
     get "/network/:echo" $ do
         str <- param "echo" :: ActionM String
         html $ T.pack . E.giveNetworkString . decodedList $ B.pack str
+    get "/resOrder/:echo" $ do
+        str <- param "echo" :: ActionM String
+        html $ T.pack . E.givePrefOrder . decodedList $ B.pack str
+    get "/edgeStr/:echo"  $ do
+        str <- param "echo" :: ActionM String
+        html $ T.pack . E.giveEdgeStrength . decodedList $ B.pack str
