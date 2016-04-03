@@ -12,16 +12,18 @@ import Data.Bimap ((!),(!>))
 type NEdge a =(a,a)
 type NList a= [[NEdge a]]
 type NMap a=Bimap.Bimap Int a
+--Element labeled graph (no labels on edges)
 type ELabelGr a =Gr a ()
 
 
-
+--gives unique names
 uniqueFromNList :: (Eq a) => NList a -> [a]
 uniqueFromNList = List.nub . concat . (map (\ (a,b) -> [a,b])) . concat
 
---adds nodes
+--gives bimap of element num to ord identifier
 bimapFromNList :: (Ord a) => NList a -> NMap a
 bimapFromNList nList= Bimap.fromList (zip [1..] (uniqueFromNList (nList)))
+
 
 addNodes :: NMap a -> ELabelGr a
 addNodes nList = mkGraph (Bimap.toList nList) []
