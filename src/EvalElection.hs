@@ -19,6 +19,7 @@ type ELabelGr a =Gr a ()
 uniqueFromNList :: (Eq a) => NList a -> [a]
 uniqueFromNList = List.nub . concat . (map (\ (a,b) -> [a,b])) . concat
 
+--adds nodes
 bimapFromNList :: (Ord a) => NList a -> NMap a
 bimapFromNList nList= Bimap.fromList (zip [1..] (uniqueFromNList (nList)))
 
@@ -68,7 +69,7 @@ giveElecResult ::(Ord a) => NList a ->(ELabelGr a,[(Int,[a])])
 giveElecResult elec = (resultGraph,finalResults)
   where
      (resultGraph,biMap) = processElecResult elec
-     resultPair = map (\x -> (head x,length $ x`dfs` resultGraph)) (map (\x->[x])(nodes resultGraph))  -- (node, descentent nodes)
+     resultPair = map (\x -> (head x,length $ x `dfs` resultGraph)) (map (\x->[x])(nodes resultGraph))  -- (node, descentent nodes)
      groupedResults =  List.groupBy (\(_,a) (_,b) -> a==b) resultPair
      unsortedResults = [(snd . head $ aGrp, map ((!) biMap) $ map fst aGrp ) |aGrp<-groupedResults]
      finalResults = List.sortBy (\(a,_) (b,_) -> compare b a) unsortedResults

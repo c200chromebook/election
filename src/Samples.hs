@@ -38,6 +38,9 @@ result2 :: String
 result2 =giveNetworkString sampleElection2
 
 
+loopElec :: Election
+loopElec = [["A","B"],["B","A"]]
+
 sampleBallot' :: Ballot
 sampleBallot' = ["chicken","dog","chicken"] -- should ignore final chicken
 result' = giveRankedList [sampleBallot']
