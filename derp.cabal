@@ -1,0 +1,9 @@
+name:              derp
+version:           1.0
+Build-Type:        Simple
+cabal-version:     >= 1.2
+
+executable derp
+  main-is:         Main.hs
+  hs-source-dirs:  src
+  build-depends:   base,containers,fgl,bimap,text,scotty,aeson,bytestring
