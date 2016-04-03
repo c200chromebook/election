@@ -20,12 +20,12 @@ incrementVote x = x+1
 decrementVote :: TotPref -> (TotPref)
 decrementVote x = x-1
 
---Flip those pairs where negative preferences emerge, and drop null preferences
+--Flip those pairs where negative preferences emerge, and preserve null preferences by (x,x) and (y,y)
 absReferences :: [(Preference,Integer)] -> [(Preference,Integer)]
 absReferences [] = []
 absReferences (((over,under),str):rst)
    | str < 0  = ((under,over),-str):absReferences(rst)
-   | str == 0 = absReferences(rst)
+   | str == 0 = ((under,under),0):((over,over),0):absReferences(rst)
    | otherwise= ((over,under),str):absReferences(rst)
 
 

@@ -1,6 +1,7 @@
 module Samples where
 import Election
 import EndToEndElect
+import EvalElection
 --sampleRoster :: Roster
 --sampleRoster = ["cat","dog","chicken"]
 sampleBallot1 :: Ballot
