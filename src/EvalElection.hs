@@ -16,6 +16,14 @@ type NMap a=Bimap.Bimap Int a
 type ELabelGr a =Gr a ()
 
 
+newtype  ResultPair a b =  ResultPair (a,b)
+instance (Eq b) => Eq (ResultPair a b) where
+ (==) (ResultPair (_,j)) (ResultPair (_,k)) = j==k
+instance (Ord b) => Ord (ResultPair a b) where
+ compare (ResultPair (_,j)) (ResultPair (_,k)) = compare j k
+
+yieldPair :: ResultPair a b -> (a,b)
+yieldPair (ResultPair (a,b)) = (a,b)
 --gives unique names
 uniqueFromNList :: (Eq a) => NList a -> [a]
 uniqueFromNList = List.nub . concat . (map (\ (a,b) -> [a,b])) . concat
@@ -68,13 +76,13 @@ processElecResult nList=(foldl joinExcludeCycles nodeOnlyMap nodeListsToJoin,uni
 
 
 giveElecResult ::(Ord a) => NList a ->(ELabelGr a,[(Int,[a])])
-giveElecResult elec = (resultGraph,finalResults)
+giveElecResult elec = (resultGraph,finalResults )
   where
      (resultGraph,biMap) = processElecResult elec
-     resultPair = map (\x -> (head x,length $ x `dfs` resultGraph)) (map (\x->[x])(nodes resultGraph))  -- (node, descentent nodes)
-     groupedResults =  List.groupBy (\(_,a) (_,b) -> a==b) resultPair
-     unsortedResults = [(snd . head $ aGrp, map ((!) biMap) $ map fst aGrp ) |aGrp<-groupedResults]
-     finalResults = List.sortBy (\(a,_) (b,_) -> compare b a) unsortedResults
+     resultPair = map (\x -> ResultPair (head x,length $ x `dfs` resultGraph)) (map (\x->[x])(nodes resultGraph))  -- (node, descentent nodes)
+     groupedResults =  List.group . List.sort $ resultPair
+     finalResults = reverse [(snd .yieldPair . head $ aGrp, map ((!) biMap) $ map (fst.yieldPair) aGrp ) |aGrp <-groupedResults]
+
 
 jsonElecResult :: (ELabelGr String,[(Int,[String])]) -> [[String]]
 jsonElecResult result = [show (x-1) : y | (x,y) <-snd result]

@@ -33,6 +33,8 @@ sampleElection2 :: Election
 sampleElection2 = [sampleBallotA,sampleBallotB,sampleBallotC,sampleBallotD,sampleBallotE]
 
 
+sampleElectionZ= [["Its","Got","Electrolytes","Plants","What"],["Electrolytes","Fiber","Brawndos","Plants","Got"]]
+
 result :: String
 result = giveRankedList sampleElection
 result2 :: String
