@@ -76,6 +76,11 @@ giveElecResult elec = (resultGraph,finalResults)
      unsortedResults = [(snd . head $ aGrp, map ((!) biMap) $ map fst aGrp ) |aGrp<-groupedResults]
      finalResults = List.sortBy (\(a,_) (b,_) -> compare b a) unsortedResults
 
+jsonElecResult :: (ELabelGr String,[(Int,[String])]) -> [[String]]
+jsonElecResult result = [show (x-1) : y | (x,y) <-snd result]
+
+
+
 prettyElecResult :: (ELabelGr String,[(Int,[String])]) -> String
 prettyElecResult result = List.intercalate "\n" [show (x-1) ++":" ++ (List.intercalate "," y) | (x,y) <-snd result]
 
