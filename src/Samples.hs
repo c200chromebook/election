@@ -33,13 +33,16 @@ sampleElection2 :: Election
 sampleElection2 = [sampleBallotA,sampleBallotB,sampleBallotC,sampleBallotD,sampleBallotE]
 
 
+sampleElectionWC= [["/","\"","\\"]]
+
 sampleElectionZ= [["Its","Got","Electrolytes","Plants","What"],["Electrolytes","Fiber","Brawndos","Plants","Got"]]
 
 result :: String
 result = giveRankedList sampleElection
 result2 :: String
 result2 =giveNetworkString sampleElection2
-
+result3 :: String
+result3 =giveRankedList sampleElectionWC
 
 loopElec :: Election
 loopElec = [["A","B"],["B","A"]]

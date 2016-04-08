@@ -14,20 +14,21 @@ decodedList x = (fromJust .A.decode $ x :: [[String]])
 
 
 -- if gchi, run this :set -XOverloadedStrings
+-- Todo: Clean this up
 main :: IO ()
 main = scotty 3000 $ do
-    get "/result/:echo" $ do
-        str <- param "echo" :: ActionM String
+    post "/result/:any" $ do
+        str <- param "payload" :: ActionM String
         html $ T.pack . E.giveRankedList . decodedList $ B.pack str
-    get "/jsonResult/:echo" $ do
-        str <- param "echo" :: ActionM String
+    post "/jsonResult/:echo" $ do
+        str <- param "payload" :: ActionM String
         json $ E.giveJSONResult . decodedList $ B.pack str
-    get "/network/:echo" $ do
-        str <- param "echo" :: ActionM String
+    post "/network/:echo" $ do
+        str <- param "payload" :: ActionM String
         html $ T.pack . E.giveNetworkString . decodedList $ B.pack str
-    get "/resOrder/:echo" $ do
-        str <- param "echo" :: ActionM String
+    post "/resOrder/:echo" $ do
+        str <- param "payload" :: ActionM String
         html $ T.pack . E.givePrefOrder . decodedList $ B.pack str
-    get "/edgeStr/:echo"  $ do
-        str <- param "echo" :: ActionM String
+    post "/edgeStr/:echo"  $ do
+        str <- param "payload" :: ActionM String
         html $ T.pack . E.giveEdgeStrength . decodedList $ B.pack str
