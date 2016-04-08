@@ -1,19 +1,21 @@
 module EndToEndElect where
 import Election
 import EvalElection
+import CIConverters
+
 
 giveRankedList :: [[String]] -> String
-giveRankedList = prettyElecResult . giveElecResult .processElection
+giveRankedList = prettyElecResult .cnvResult  . giveElecResult . processElection . cnvList
 
 giveNetworkString :: [[String]] -> String
-giveNetworkString = prettyNetwork . giveElecResult .processElection
+giveNetworkString = prettyNetwork .cnvResult . giveElecResult . processElection . cnvList
 
 
 giveJSONResult :: [[String]] -> [[String]]
-giveJSONResult =jsonElecResult .giveElecResult .processElection
+giveJSONResult =jsonElecResult .cnvResult .giveElecResult .processElection . cnvList
 
 givePrefOrder :: [[String]] ->String
-givePrefOrder = show . processElection
+givePrefOrder = show . unCnvList . processElection . cnvList
 
 giveEdgeStrength :: [[String]] -> String
-giveEdgeStrength = show . givePrefMap
+giveEdgeStrength = show . givePrefMap . cnvList

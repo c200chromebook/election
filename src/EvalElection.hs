@@ -84,9 +84,9 @@ giveElecResult elec = (resultGraph,finalResults )
      finalResults = reverse [(snd .yieldPair . head $ aGrp, map ((!) biMap) $ map (fst.yieldPair) aGrp ) |aGrp <-groupedResults]
 
 
+--Pretty Printing, in the event of strings
 jsonElecResult :: (ELabelGr String,[(Int,[String])]) -> [[String]]
 jsonElecResult result = [show (x-1) : y | (x,y) <-snd result]
-
 
 
 prettyElecResult :: (ELabelGr String,[(Int,[String])]) -> String
