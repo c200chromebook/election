@@ -9,6 +9,8 @@ Doesn't yet allow ties to be input, but there's nothing in the algorithm that sh
 
 Particularly well suited for combining preferences where consensus is assumed among the rankers, but not all rankers will observe all things. Applications include journal articles, hiring decisions, etc.
 
+Also provides a scotty API, which I hook up to google sheets. 
+
 Pull requests welcome.
 
 Algorithm:
