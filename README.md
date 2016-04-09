@@ -5,9 +5,11 @@ Takes a list of ballots and, like [Tideman Voting](https://en.wikipedia.org/wiki
 
 That is, if person 1 provides [A,B] and person 2 provides [B,C], the ranking will be [A,B,C]. Presumably person B, if unhappy with the ranking, can go back and evaluate A.
 
-Doesn't yet allow ties, but there's nothing in the algorithm that should preclude preferences with ties.
+Doesn't yet allow ties to be input, but there's nothing in the algorithm that should preclude preferences with ties.
 
 Particularly well suited for combining preferences where consensus is assumed among the rankers, but not all rankers will observe all things. Applications include journal articles, hiring decisions, etc.
+
+Pull requests welcome.
 
 Algorithm:
 
