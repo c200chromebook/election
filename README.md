@@ -11,7 +11,7 @@ Particularly well suited for combining preferences where consensus is assumed am
 
 Also provides a scotty API, which I hook up to google sheets. 
 
-Pull requests welcome.
+Pull requests welcome. I build it with ghc 7.10, I can't promise it'll work with anything older.
 
 Algorithm:
 
