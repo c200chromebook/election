@@ -10,6 +10,9 @@ Doesn't yet allow ties, but there's nothing in the algorithm that should preclud
 Particularly well suited for combining preferences where consensus is assumed among the rankers, but not all rankers will observe all things. Applications include journal articles, hiring decisions, etc.
 
 Algorithm:
+
 1. Determine pairwise preference strength of each pair of candidates
+
 2. Lock preferences in order of preference strength, unless a cycle would result, in which case discard preferences adding cycles.
+
 3. The item beating the most other items can be inferred to be the "winner".
